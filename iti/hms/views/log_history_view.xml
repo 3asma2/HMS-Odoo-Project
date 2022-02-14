@@ -1,0 +1,31 @@
+<odoo>
+    <data>
+        <record id="log_history_form_view" model="ir.ui.view">
+            <field name="name">log history from view</field>
+            <field name="model">log.history</field>
+            <field name="arch" type="xml">
+                 <form>
+                    <sheet>
+                        <group>
+                            <field name="created_by" />
+                            <field name="date" />
+                            <field name="description"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+         <record id="hms_log_history_action" model="ir.actions.act_window">
+            <field name="name">log history</field>
+            <field name="res_model">log.history</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+          <menuitem id="hms_log_history_menu"
+        name="Log History"
+        parent="hms_root_menu"
+        action="hms_log_history_action"/>
+
+    </data>
+</odoo>
