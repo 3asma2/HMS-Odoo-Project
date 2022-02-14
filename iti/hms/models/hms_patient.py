@@ -25,6 +25,7 @@ class HmsPatient(models.Model):
     department_id=fields.Many2one('hms.department')
     capacity=fields.Integer(related='department_id.capacity')
     doctors_id=fields.Many2many('hms.doctors')
+    customer_id = fields.Many2one('res.partner')
     state=fields.Selection([
         ('undetermined', 'Undetermined'),
         ('good', 'Good'),
@@ -67,6 +68,19 @@ class HmsPatient(models.Model):
     def _age_birth_date(self):
         if self.birth_date:
             self.age = date.today().year - self.birth_date.year
+
+
+
+    def next_stage(self):
+        if self.state == 'undetermined':
+            self.state = 'good'
+        elif self.state == 'good':
+            self.state = 'fair'
+        elif self.state == 'fair':
+            self.state = 'serious'
+        elif self.state == 'serious':
+            self.state = 'undetermined'
+        self.create_log()
 
     def create_log(self):
         self.env['log.history'].create({
