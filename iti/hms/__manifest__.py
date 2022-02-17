@@ -2,6 +2,7 @@
     'name':'hms',
     'summary':'this moduel for hospitals',
 
+
     'data':[
         'security/security.xml',
         'security/ir.model.access.csv',
